@@ -1,4 +1,5 @@
 # Rodando banco de dados com container:
+    docker volume create kubedevnews_vol
     docker container run -d -p 5432:5432 -e POSTGRES_PASSWORD=Pg#123 -e POSTGRES_USER=kubedevnews -e POSTGRES_DB=kubedevnews --mount source=kubedevnews_vol,target=/var/lib/postgresql/data postgres
 
 ## Nota de experi:
