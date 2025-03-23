@@ -1,6 +1,6 @@
 # Criacao da imagem da app:
     docker build -t lufertony/kube-news:v2 .    
-        Rodou de dentro do src onde esta o Dockerfile
+Rodou de dentro do src onde esta o Dockerfile
 
 # Adicionando TAG
     docker tag lufertony/kube-news:v2 lufertony/kube-news:latest
