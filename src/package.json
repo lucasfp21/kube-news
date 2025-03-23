@@ -14,6 +14,7 @@
     "ejs": "^3.1.10",
     "express": "^4.21.2",
     "express-prom-bundle": "6.4.1",
+    "kube-news": "file:",
     "pg": "8.7.3",
     "pg-hstore": "2.3.4",
     "prom-client": "14.0.1",
