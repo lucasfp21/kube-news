@@ -13,6 +13,22 @@ services:
     volumes:
     #  - C:\Users\lucas\Documents\DevopsPro\kubenews\kube-news\db_volume:/var/lib/postgresql/data
       - postgre_voldb:/var/#lib/postgresql/data
+    networks:
+      - kubenews_net
+
+  kubenews:
+    container_name: kube-web
+    image: lufertony/kube-news:v1
+    ports:
+      - 8080:8080
+    networks:
+      - kubenews_net
+    environment:
+      DB_PASSWORD: Pg123
+      DB_USERNAME: kubenews
+      DB_DATABASE: kubenews
+      DB_HOST: postgresql
+
 
 volumes:
   postgre_voldb:
@@ -22,3 +38,4 @@ volumes:
 networks:
   kubenews_net:
     driver: bridge
+    name: kubenews_net
