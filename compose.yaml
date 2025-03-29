@@ -18,7 +18,7 @@ services:
 
   kubenews:
     container_name: kube-web
-    image: lufertony/kube-news:v1
+    image: lufertony/kube-news:v2
     ports:
       - 8080:8080
     networks:
