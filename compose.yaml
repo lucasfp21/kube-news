@@ -2,7 +2,7 @@
 
 services:
   postgre:
-    container_name: postgresql
+  #  container_name: postgresql
     image: postgres:12.17
     ports:
       - 5432:5432
@@ -15,21 +15,33 @@ services:
       - postgre_voldb:/var/#lib/postgresql/data
     networks:
       - kubenews_net
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U kubenews"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
 
   kubenews:
-    container_name: kube-web
-    image: lufertony/kube-news:v2
+   # container_name: kube-web
+    image: lufertony/kube-news
+    depends_on:
+      postgre:
+        condition: service_healthy
+
+    build:
+      context: ./src
+      dockerfile: Dockerfile
     ports:
       - 8080:8080
     networks:
       - kubenews_net
-    depends_on:
-      - postgre
+
     environment:
       DB_PASSWORD: Pg123
       DB_USERNAME: kubenews
       DB_DATABASE: kubenews
-      DB_HOST: postgresql
+      DB_HOST: postgre
 
 
 volumes:
