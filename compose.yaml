@@ -23,6 +23,8 @@ services:
       - 8080:8080
     networks:
       - kubenews_net
+    depends_on:
+      - postgre
     environment:
       DB_PASSWORD: Pg123
       DB_USERNAME: kubenews
