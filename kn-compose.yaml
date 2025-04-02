@@ -1,0 +1,21 @@
+services:
+  kubenews:
+   # container_name: kube-web
+    image: lufertony/kube-news:${KB_TAG:- latest}
+    depends_on:
+      postgre:
+        condition: service_healthy
+
+    build:
+      context: ./src
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080
+    networks:
+      - kubenews_net
+
+    environment:
+      DB_PASSWORD: ${PG_PASS} 
+      DB_USERNAME: ${PG_USER} 
+      DB_DATABASE: ${PG_DB}
+      DB_HOST: postgre
