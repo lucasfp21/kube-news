@@ -7,9 +7,9 @@ services:
     ports:
       - 5432:5432
     environment:
-      POSTGRES_PASSWORD: Pg123
-      POSTGRES_USER: kubenews
-      POSTGRES_DB: kubenews
+      POSTGRES_PASSWORD: ${PG_PASS}
+      POSTGRES_USER: ${PG_USER}
+      POSTGRES_DB: ${PG_DB}
     volumes:
     #  - C:\Users\lucas\Documents\DevopsPro\kubenews\kube-news\db_volume:/var/lib/postgresql/data
       - postgre_voldb:/var/#lib/postgresql/data
@@ -24,7 +24,7 @@ services:
 
   kubenews:
    # container_name: kube-web
-    image: lufertony/kube-news
+    image: lufertony/kube-news:${KB_TAG:- latest}
     depends_on:
       postgre:
         condition: service_healthy
@@ -38,9 +38,9 @@ services:
       - kubenews_net
 
     environment:
-      DB_PASSWORD: Pg123
-      DB_USERNAME: kubenews
-      DB_DATABASE: kubenews
+      DB_PASSWORD: ${PG_PASS} 
+      DB_USERNAME: ${PG_USER} 
+      DB_DATABASE: ${PG_DB}
       DB_HOST: postgre
 
 
