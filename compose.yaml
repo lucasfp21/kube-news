@@ -26,6 +26,9 @@ services:
       file: ./kn-compose.yaml
       service: kubenews
     image: lufertony/web-news:latest
+    profiles:
+      - dev
+      - hml
 
 volumes:
   postgre_voldb:

@@ -1,0 +1,4 @@
+services:
+  postgre:
+    ports:
+      - 9000:9000
