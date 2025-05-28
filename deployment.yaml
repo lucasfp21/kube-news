@@ -16,13 +16,9 @@ spec:
         image: postgres:15.0
         ports:
         - containerPort: 5432
-        env:
-        - name: POSTGRES_PASSWORD
-          value: "pg#1234"
-        - name: POSTGRES_USER
-          value: "kubenews"
-        - name: POSTGRES_DB
-          value: "kubenews"
+        envFrom:
+          - secretRef:
+              name: postgres-secret
 ---
 apiVersion: v1
 kind: Service
@@ -54,15 +50,9 @@ spec:
         image: lufertony/kube-news:v4
         ports:
         - containerPort: 8080
-        env:
-        - name: DB_DATABASE
-          value: "kubenews"
-        - name: DB_USERNAME
-          value: "kubenews"
-        - name: DB_PASSWORD
-          value: "pg#1234"
-        - name: DB_HOST
-          value: postgresql
+        envFrom:
+        - configMapRef:
+           name: kube-config
 ---
 apiVersion: v1
 kind: Service
